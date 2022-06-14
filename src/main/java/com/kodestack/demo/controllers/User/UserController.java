@@ -32,7 +32,6 @@ public class UserController {
         return ResponseEntity.ok().body(users);
     }
 
-    
     @PostMapping
     public Users createUSer(@RequestBody Users users) {
         
