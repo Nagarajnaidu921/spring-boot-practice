@@ -8,26 +8,30 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 import lombok.Data;
-import lombok.ToString;
 
-@Entity
+@Entity()
 @Data
-@EnableAutoConfiguration
-@ToString(includeFieldNames = true)
 @Table(name = "users")
-public class Users implements Serializable  {
-
+public class User implements Serializable  {
+    
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private Long id;
 
     @Column(length = 200)
     private String name;
 
-    @Column(length = 200, unique = true)
+    @Column(unique = true)
+    @Email
+    @NotNull
     private String email;
+
+    @Column()
+    @NotNull
+    private String password;
+
 }
