@@ -9,6 +9,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 import lombok.Data;
@@ -26,12 +27,16 @@ public class User implements Serializable  {
     private String name;
 
     @Column(unique = true)
-    @Email
-    @NotNull
+    @Email(message = "'${validatedValue}' is not a valid email")
+    @NotNull(message = "Email should not be null")
     private String email;
 
     @Column()
-    @NotNull
+    @NotNull(message = "Password should not be null")
+    @Min(
+        value = 8,
+        message = "Password lengh should be more than 8 charecters"
+    )
     private String password;
 
 }
